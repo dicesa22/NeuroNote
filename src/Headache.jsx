@@ -24,7 +24,7 @@ const pptHAList = ['stress','food','MSG','nitrite-containing food','chocolate','
 
 const checkNo = (x) => {
 	const cNo = x ? '' : 'not';
-  	return cNo;
+	return cNo;
 }
 
 function Headache() {
@@ -55,21 +55,21 @@ function Headache() {
 	const [checkedHeadSurg, setCheckedHeadSurg] = useState(false);
 	const [checkedHeadFam, setCheckedHeadFam] = useState(false);
 	const [checkedOHAC, setCheckedOHAC] = useState(false);
-	const [selectedXterHdc, setSelectedXterHdc] = useState(null);
-	const [selectedSubs, setSelectedSubs] = useState(null);
-	const [selectedPpxMeds, setSelectedPppxMeds] = useState(null);
-	const [selectedHdcMeds, setSelectedHdcMeds] = useState(null);
-	const [selectedSeverityList, setSelectedSeverityList] = useState(null);
-	const [selectedTemp, setSelectedTemp] = useState(null);
-	const [selectedTimeDay, setSelectedTimeDay] = useState(null);
-	const [selectedTimeUnit1, setSelectedTimeUnit1] = useState(null);
-	const [selectedTimeUnit2, setSelectedTimeUnit2] = useState(null);
-	const [selectedProdrome, setSelectedProdrome] = useState(null);
-	const [selectedSxsHdc, setSelectedSxsHdc] = useState(null);
-	const [selectedPptHdc, setSelectedPptHdc] = useState(null);
-	const [selectedfxnHdc, setSelectedFxnHdc] = useState(null);
-	const [selectedAbortHdc, setSelectedAbortHdc] = useState(null);
-	const [selectedOtherHA, setSelectedOtherHACauses] = useState(null);
+	const [selectedXterHdc, setSelectedXterHdc] = useState([]);
+	const [selectedSubs, setSelectedSubs] = useState([]);
+	const [selectedPpxMeds, setSelectedPppxMeds] = useState([]);
+	const [selectedHdcMeds, setSelectedHdcMeds] = useState([]);
+	const [selectedSeverityList, setSelectedSeverityList] = useState([]);
+	const [selectedTemp, setSelectedTemp] = useState([]);
+	const [selectedTimeDay, setSelectedTimeDay] = useState([]);
+	const [selectedTimeUnit1, setSelectedTimeUnit1] = useState([]);
+	const [selectedTimeUnit2, setSelectedTimeUnit2] = useState([]);
+	const [selectedProdrome, setSelectedProdrome] = useState([]);
+	const [selectedSxsHdc, setSelectedSxsHdc] = useState([]);
+	const [selectedPptHdc, setSelectedPptHdc] = useState([]);
+	const [selectedfxnHdc, setSelectedFxnHdc] = useState([]);
+	const [selectedAbortHdc, setSelectedAbortHdc] = useState([]);
+	const [selectedOtherHA, setSelectedOtherHACauses] = useState([]);
 	
 	return (
 		<div className="flex flex-row">
@@ -333,16 +333,16 @@ function Headache() {
 							<p>Patient complains of headache. Patient does {checkNo(checkedCurr)} have a headache at this time.</p>
 
 							<h3>Description of Headaches:</h3>
-							<p> Headache is {checkNo(checkedOnset)} sudden in onset. Pain is located at the {locHA}. Pain does {checkNo(checkedRad)} radiate<span hidden={!checkedRad}> to the {radHA}</span>. The pain is described as {selectedXterHdc}. The severity of the pain is {sevPain} on a 10-point scale. Patient does {checkNo(checkedAssHA)} have accompanying symptoms<span hidden={!checkedAssHA}> including {selectedSxsHdc}</span>. Patient does {checkNo(checkedProd)} have prodromal symptoms<span hidden={!checkedProd}> including {selectedProdrome}</span>. Individual headaches typically last for {durHA1} {selectedTimeUnit1}. Most headaches are {checkNo(checkedPrev)} similar in presentation. Headaches do {checkNo(checkedPpt)} have precipitating factors<span hidden={!checkedPpt}> including {selectedPptHdc}</span>. </p>
+							<p> Headache is {checkNo(checkedOnset)} sudden in onset. Pain is located at the {locHA}. Pain does {checkNo(checkedRad)} radiate<span hidden={!checkedRad}> to the {radHA}</span>. The pain is described as {selectedXterHdc.join(', ')}. The severity of the pain is {sevPain} on a 10-point scale. Patient does {checkNo(checkedAssHA)} have accompanying symptoms<span hidden={!checkedAssHA}> including {selectedSxsHdc.join(', ')}</span>. Patient does {checkNo(checkedProd)} have prodromal symptoms<span hidden={!checkedProd}> including {selectedProdrome.join(', ')}</span>. Individual headaches typically last for {durHA1} {selectedTimeUnit1}. Most headaches are {checkNo(checkedPrev)} similar in presentation. Headaches do {checkNo(checkedPpt)} have precipitating factors<span hidden={!checkedPpt}> including {selectedPptHdc.join(', ')}</span>. </p>
 							<h3>Temporal Pattern of Headaches</h3>
 							<p>Patient started having headaches {durHA3} {selectedTimeUnit2} ago. The worst time of day for headache is {selectedTimeDay}. Headache does {checkNo(checkedWake)} awaken patient from sleep. Headaches do {checkNo(checkedSeason)} have a seasonal pattern. Headaches do {checkNo(checkedCluster)} 'cluster’ over time. The overall pattern of headaches since problem began is {selectedTemp}</p>
 							<p>Degree of Functional Impairment: {selectedfxnHdc} </p>
 
 							<h3> Current use of medications to treat headache:</h3>
-							<p>Patient does {checkNo(checkedAbort)} use abortive medications<span hidden={!checkedAbort}> which include {selectedAbortHdc}. Patient does {checkNo(checkedDaily)} use abortive medications daily</span>. Patient does {checkNo(checkedPpx)} use prophylactic medications<span hidden={!checkedPpx}> including {selectedPpxMeds}</span></p>
+							<p>Patient does {checkNo(checkedAbort)} use abortive medications<span hidden={!checkedAbort}> which include {selectedAbortHdc.join(', ')}. Patient does {checkNo(checkedDaily)} use abortive medications daily</span>. Patient does {checkNo(checkedPpx)} use prophylactic medications<span hidden={!checkedPpx}> including {selectedPpxMeds.join(', ')}</span></p>
 
 							<h3>Additional Relevant History:</h3>
-							<p>Patient does {checkNo(checkedHeadTrauma)} report a history of head/neck trauma<span hidden={!checkedHeadTrauma}>, namely {headTraumaValue} </span>. Patient does {checkNo(checkedHeadSurg)} report a history of head/neck surgery<span hidden={!checkedHeadSurg}>, namely {headSurgValue}</span>. Patient is {checkNo(checkedHeadFam)} aware of a family history of headache problems<span hidden={!checkedHeadTrauma}>, namely {headFamValue}</span>. Patient does {checkNo(checkedOHAC)} endorse other factors that might worsen headaches<span hidden={!checkedOHAC}>, including {selectedOtherHA}</span>. </p>
+							<p>Patient does {checkNo(checkedHeadTrauma)} report a history of head/neck trauma<span hidden={!checkedHeadTrauma}>, namely {headTraumaValue} </span>. Patient does {checkNo(checkedHeadSurg)} report a history of head/neck surgery<span hidden={!checkedHeadSurg}>, namely {headSurgValue}</span>. Patient is {checkNo(checkedHeadFam)} aware of a family history of headache problems<span hidden={!checkedHeadTrauma}>, namely {headFamValue}</span>. Patient does {checkNo(checkedOHAC)} endorse other factors that might worsen headaches<span hidden={!checkedOHAC}>, including {selectedOtherHA.join(', ')}</span>. </p>
 						</>
 					</div>
 				</div>
