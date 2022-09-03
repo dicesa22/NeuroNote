@@ -8,6 +8,7 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
 import { SelectButton } from "primereact/selectbutton";
+import { Skeleton } from 'primereact/skeleton';
 
 const UserContext = createContext();
 
@@ -159,7 +160,7 @@ function App() {
 			<TabMenu model={items} />
 			<Divider />
 			<SelectButtonDemo />
-			<React.Suspense fallback={<div>Loading...</div>}>
+			<React.Suspense fallback={<div className="surface-0 flex-row w-12 border-round"> <Skeleton /> </div>}>
 				<div className="surface-0 flex-column p-3">
 					{
 						compArray.map((Comp1) => (
