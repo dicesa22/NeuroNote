@@ -74,6 +74,8 @@ function Headache() {
 	return (
 		<div className="flex flex-row">
 			<div className="formgrid grid surface-0 p-3 shadow-2 border-round w-6">
+				<div className="text-3xl font-medium text-900 mb-3">Headache</div>
+				<Divider/>
 				<div className="field m-2"> 
 					<div className="field-checkbox">
 						<Checkbox
