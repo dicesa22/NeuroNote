@@ -99,7 +99,7 @@ function App() {
 	    { name: "Hand Numbness", value: 3 },
 	    { name: "Back / Leg Pain", value: "BackLegPain" },
 	    { name: "Foot Numbness", value: 5 },
-	    { name: "Spell", value: "Spell" },
+	    { name: "Spell", value: Spell },
 	    { name: "Dizziness", value: 7 },
 	    { name: "Tremor", value: 8 },
 	    { name: "Visual Loss", value: 9 },

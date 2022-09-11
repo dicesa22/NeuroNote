@@ -10,7 +10,6 @@ import { Checkbox } from "primereact/checkbox";
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { checkNull, checkNo } from './customFunctions';
 
 
 const xterHAList = ['aching','boring','burning','crushing','dull','numbing','pulsating','sharp','shooting','stabbing','throbbing','tight band','tingling'];
@@ -24,6 +23,15 @@ const timeUnits = ['seconds','minutes','hours','days','weeks','years'];
 const sxsHAList = ['nausea','vomiting','sonophobia','photophobia','scotomata','photopsia','diplopia','hemianopsia','paresthesias','aphasia','mental status changes','decreased social functioning','vertigo','tinnitus','ataxia','neck stiffness','conjunctival injection','lacrimation','nasal congestion','rhinorrhea','facial sweating','ptosis','eyelid edema'];
 const pptHAList = ['stress','food','MSG','nitrite-containing food','chocolate','coffee','cheese','others','medications','alcohol','tobacco','odors','caffeine withdrawal','change in sleep pattern','change in eating pattern','sexual activity','coughing','sneezing','laughing','straining at stool','bending over','menses','working in front of CRT screen','work','hobby activity'];
 
+const checkNo = (x) => {
+	const cNo = x ? '' : 'not';
+	return cNo;
+}
+
+const checkNull = (x) => {
+	const cNo = x ? x : '_____';
+	return cNo;
+}
 
 function Headache() {
 	const [locHA, setLocHA] = useState('');

@@ -1,0 +1,319 @@
+import React, { useState, useEffect, } from "react";
+import { MultiSelect } from 'primereact/multiselect';
+import { Divider } from "primereact/divider";
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
+import { InputText } from 'primereact/inputtext';
+import { InputTextarea } from 'primereact/inputtextarea';
+import { Checkbox } from "primereact/checkbox";
+import { InputNumber } from 'primereact/inputnumber';
+import { Dropdown } from 'primereact/dropdown';
+import { checkNull, checkNo, checkList } from './customFunctions';
+
+const onsetList = ["focal", "generalized"];
+const awareList = ["no loss of consciousness", "initially no LOC but progresses to LOC", "completely unresponsive during worst of episode", "appears somewhat dazed during episode", "staring and loss of awareness", "behavioral arrest noted", "initially dazed then progressing to complete LOC"];
+const postIctalList = ["level of consciousness throughout episode", "immediate return to normal level of consciousness", "coma gradually replaced by confusional state", "lethargy", "focal weakness", "headache", "other",];
+const premList = ["headache", "mood change", "anxiety", "irritability", "lethargy", "decreased appetite", "increased appetite", "lightheadedness", "visual hallucinations", "auditory hallucination", "other",];
+const locList = ["right arm","left arm", "right leg", "left leg", "right face", "left face", "other", ];
+const timeUnits = ['seconds','minutes', 'hours', 'days','weeks','years'];
+const pptList =["hyperventilation", "emotional stress", "flashing lights", "movement", "change in body position", "sleep deprivation", "ASM nonadherence", "alcohol use", "fever", "menses", "other",];
+const assocList = ["incontinence of urine", "incontinence of stool", "injury during episode", "tongue biting", "strange smells", "strange sensations", "visual hallucinations", "distortions in visual sensation", "distortions in auditory sensation", "distortions in time sensation", "deja vu", "previous staring episodes", "enuresis", "falling out of bed", "awakening exhausted with muscle aches", "rising sensation in the abdomen", "other",];
+const workUpList = ["CT scan of head", "MRI of head", "EEG", "drug screen", "metabolic screen", "lumbar puncture", "CBC", "ESR", "RPR", "SPECT scan", "PET scan", "other"];
+const medList = ["carbamazepine (Carbatrol)", "carbamazepine (Tegretol)", "carbamazepine (Tegretol XR)", "clobazam (Onfi)", "clonazepam (Klonopin)", "diazepam (Diastat)", "ethosuximide (Zarontin)", "gabapentin (Neurontin)", "lacosamide (Vimpat)", "lamotrigine (Lamictal)", "levetiracetam (Keppra)", "oxcarbazepine (Trileptal)", "phenobarbital", "phenytoin (Dilantin)", "primidone (Mysoline)", "tiagabine (Gabitril)", "topiramate (Topamax)", "valproic acid (Depakote)", "zonisamide (Zonegran)", "methylphenidate (Ritalin)", "other", ];
+const childHxList = ["IUGR", "preterm birth", "neonatal asphyxia", "NICU stay", "other perinatal complications:", "developmental delay", "febrile seizure", "other",];
+const pmHxList = ["previous seizures", "head trauma", "meningitis/ encephalitis", "brain structural abnormality", "stroke", "other",];
+
+const pptList2 = pptList;
+pptList2.pop();
+const assocList2 = assocList;
+assocList2.pop();
+const workUpList2 = workUpList;
+workUpList2.pop();
+const childHxList2 = childHxList;
+childHxList2.pop();
+const pmHxList2 = pmHxList;
+pmHxList2.pop();
+
+
+function Spell() {
+	const informantList = ["family","patient", "other",];
+	const [selectedOnset, setSelectedOnset] = useState(null);
+	const [erVisitValue, setErVisitValue] = useState(null);	
+	const [durHA1, setDurHA1] = useState(null);
+	const [durHA2, setDurHA2] = useState(null);
+	const [durHA3, setDurHA3] = useState(null);
+	const [selectedTimeUnit1, setSelectedTimeUnit1] = useState(null);
+	const [selectedTimeUnit2, setSelectedTimeUnit2] = useState(null);
+	const [selectedTimeUnit3, setSelectedTimeUnit3] = useState(null);
+	const [selectedPptPres, setSelectedPptPres] = useState([]);
+	const [selectedPptAbs, setSelectedPptAbs] = useState(pptList);
+	const [pptValue, setPptValue] = useState('');	
+	const [checkedFamHx, setCheckedFamHx] = useState(false);
+	const [checkedPrev, setCheckedPrev] = useState(false);
+	const [checkedSimilar, setCheckedSimilar] = useState(false);
+	const [checkedFocal, setCheckedFocal] = useState(false);
+	const [checkedAmnesia, setCheckedAmnesia] = useState(false);
+	const [semiValue, setSemiValue] = useState('');
+	const [famHxValue, setFamHxValue] = useState('');
+	const [prevRxValue, setPrevRxValue] = useState('');
+	const [selectedSxPres, setSelectedSxPres] = useState([]);
+	const [selectedFocalLoc, setSelectedFocalLoc] = useState([]);
+	const [sxAbsList, setSxAbsList] = useState(assocList);
+	
+	
+	const [etohValue, setEtohValue] = useState('');
+	const [checkedIllicit, setCheckedIllicit] = useState(false);
+	const [illicitValue, setIllicitValue] = useState('');
+	const [checkedMotor, setCheckedMotor] = useState(false);
+	const [motorValue, setMotorValue] = useState('');
+	const [freqValue, setFreqValue] = useState('');
+	const [checkedNeuroCons, setCheckedNeuroCons] = useState(false);
+	const [neuroConsValue, setNeuroConsValue] = useState('');
+	const [selectedAware, setSelectedAware] = useState([]);
+	const [selectedPostIctal, setSelectedPostIctal] = useState([]);		
+	const [selectedPrem, setSelectedPrem] = useState([]);	
+	const [selectedWorkUp, setSelectedWorkUp] = useState([]);
+	const [selectedWorkUpAbs, setSelectedWorkUpAbs] = useState(workUpList);
+	const [selectedPpxMeds1, setSelectedPpxMeds1] = useState([]);
+	const [prevValue, setPrevValue] = useState('');
+	const [selectedChildHx, setSelectedChildHx] = useState([]);	
+	const [selectedChildHxAbs, setSelectedChildHxAbs] = useState(childHxList);		
+	const [selectedPmHx, setSelectedPmHx] = useState([]);
+	const [selectedPmHxAbs, setSelectedPmHxAbs] = useState(pmHxList);		
+
+	
+		
+	useEffect(() => {
+		setSelectedPptAbs(() => pptList2.filter( ( el ) => !selectedPptPres.includes( el ) ));
+	}, [selectedPptPres]);
+	
+	useEffect(() => {
+		setSxAbsList(() => assocList2.filter( ( el ) => !selectedSxPres.includes( el ) ));
+	}, [selectedSxPres]);
+	
+	useEffect(() => {
+		setSelectedWorkUpAbs(() => workUpList2.filter( ( el ) => !selectedWorkUp.includes( el ) ));
+	}, [selectedWorkUp]);
+	
+	useEffect(() => {
+		setSelectedPmHxAbs(() => pmHxList.filter( ( el ) => !selectedPmHx.includes( el ) ));
+	}, [selectedPmHx]);
+		
+	useEffect(() => {
+		setSelectedChildHxAbs(() => childHxList.filter( ( el ) => !selectedChildHx.includes( el ) ));
+	}, [selectedChildHx]);
+
+	
+	return (
+		<div className="flex flex-row">
+			<div className="formgrid grid surface-0 p-3 shadow-2 border-round w-6">
+				<div className="text-3xl font-medium text-900 mb-3">Spell</div>
+				<Divider/>
+				<div className="field m-3 formgroup-inline">
+					<label htmlFor="durId" className="p-2">Duration since first episode</label>
+					<InputNumber inputId="durId" value={durHA1} onValueChange={(e) => setDurHA1(e.value)} size={1} showButtons step={1} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" min={1} />
+					<Dropdown value={selectedTimeUnit1} options={timeUnits} onChange={(e) => setSelectedTimeUnit1(e.value)} placeholder="Time Unit" />
+				</div>
+				<div className="field m-3 formgroup-inline">
+					<label htmlFor="onsetId" className="p-2">Onset</label>
+					<Dropdown inputId="onsetId" value={selectedOnset} options={onsetList} onChange={(e) => setSelectedOnset(e.value)} placeholder="Onset of episode" />
+				</div>
+				<div className="field m-3">
+					<span className="p-float-label">
+						<InputTextarea id="txtSemi" value={semiValue} onChange={(e) => setSemiValue(e.target.value)} rows={5} cols={30} autoResize />
+						<label htmlFor="txtSemi">Description of spell</label>
+					</span>
+				</div>	
+				<div className="field m-3" >
+					<MultiSelect id="msPptId" value={selectedPptPres} options={pptList} onChange={(e) => setSelectedPptPres(e.value)} placeholder="Precipitants" display="chip"  />
+				</div>
+				<div hidden={selectedPptPres.length === 0} className="field m-3">
+					<span className="p-float-label">
+						<InputText id="inpPptId" value={pptValue} onChange={(e) => setPptValue(e.target.value)} />
+						<label htmlFor="inpPptId">Precipitants Details</label>
+					</span>
+				</div>
+				<div className="field m-3" >
+					<MultiSelect id="msPremId" value={selectedPrem} options={premList} onChange={(e) => setSelectedPrem(e.value)} placeholder="Premonitory symptoms" display="chip"  />
+				</div>
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbPrev" 
+						checked={checkedPrev}
+						onChange={(e) => setCheckedPrev(e.checked)}
+						/>
+						<label htmlFor="cbPrev">Previous episodes</label>
+					</div>				
+				</div>
+				<div className="field m-3" hidden={!checkedPrev}>
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbSimilar" 
+						checked={checkedSimilar}
+						onChange={(e) => setCheckedSimilar(e.checked)}
+						/>
+						<label htmlFor="cbSimilar">Episodes similar in presentation</label>
+					</div>
+				</div>
+				<div className="field m-3" hidden={!checkedPrev}>
+					<span className="p-float-label">
+						<InputText id="inpPrev" value={prevValue} onChange={(e) => setPrevValue(e.target.value)} />
+						<label htmlFor="inpPrev">Previous episodes details</label>
+					</span>
+				</div>					
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbMotor" 
+						checked={checkedMotor}
+						onChange={(e) => setCheckedMotor(e.checked)}
+						/>
+						<label htmlFor="cbMotor">Motor features</label>
+					</div>
+				</div>		
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbFocal" 
+						checked={checkedFocal}
+						onChange={(e) => setCheckedFocal(e.checked)}
+						/>
+						<label htmlFor="cbFocal">Focal onset</label>
+					</div>
+				</div>	
+				<div className="field m-3" hidden={!checkedFocal}>
+					<MultiSelect id="msFocLoc" value={selectedFocalLoc} options={locList} onChange={(e) => setSelectedFocalLoc(e.value)} placeholder="Site of focal onset" display="chip"  />
+				</div>				
+				<Divider/>
+				<div className="field m-3 formgroup-inline">
+					<label htmlFor="durId2" className="p-2">Duration of spell</label>
+					<InputNumber inputId="durId2" value={durHA2} onValueChange={(e) => setDurHA2(e.value)} size={1} showButtons step={1} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" min={1} />
+					<Dropdown value={selectedTimeUnit2} options={timeUnits} onChange={(e) => setSelectedTimeUnit2(e.value)} placeholder="Time Unit" />
+				</div>
+				<div className="field m-3" >
+					<MultiSelect id="msAware" value={selectedAware} options={locList} onChange={(e) => setSelectedAware(e.value)} placeholder="Awareness during spell" display="chip"  />
+				</div>
+				<div className="field m-3">
+					<MultiSelect id="msSx" value={selectedSxPres} options={assocList} onChange={(e) => setSelectedSxPres(e.value)} placeholder="Associated Symptoms" display="chip"  />
+				</div>
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbAmnesia" 
+						checked={checkedAmnesia}
+						onChange={(e) => setCheckedAmnesia(e.checked)}
+						/>
+						<label htmlFor="cbAmnesia">Amnestic about episode</label>
+					</div>
+				</div>
+				<div className="field m-3">
+					<span className="p-float-label">
+						<InputText id="inpFreq" value={freqValue} onChange={(e) => setFreqValue(e.target.value)} />
+						<label htmlFor="inpFreq">Frequency of episodes</label>
+					</span>
+				</div>				
+				<div className="field m-3 formgroup-inline">
+					<label htmlFor="durId3" className="p-2">Time since last episode</label>
+					<InputNumber inputId="durId3" value={durHA3} onValueChange={(e) => setDurHA3(e.value)} size={1} showButtons step={1} decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" min={1} />
+					<Dropdown value={selectedTimeUnit3} options={timeUnits} onChange={(e) => setSelectedTimeUnit3(e.value)} placeholder="Time Unit" />
+				</div>
+				<Divider/>
+				<div className="field m-3">
+					<MultiSelect id="msChildHx" value={selectedChildHx} options={childHxList} onChange={(e) => setSelectedChildHx(e.value)} placeholder="Childhood Risk Factors" display="chip"  />
+				</div>
+				<div className="field m-3">
+					<MultiSelect id="msPmHx" value={selectedPmHx} options={pmHxList} onChange={(e) => setSelectedPmHx(e.value)} placeholder="Other Risk Factors" display="chip"  />
+				</div>
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbFamHx" 
+						checked={checkedFamHx}
+						onChange={(e) => setCheckedFamHx(e.checked)}
+						/>
+						<label htmlFor="cbFamHx">Family history of similar problems</label>
+					</div>
+				</div>
+				<div className="field m-3" hidden={!checkedFamHx}>
+					<span className="p-float-label">
+						<InputText id="inpFamHx" value={famHxValue} onChange={(e) => setFamHxValue(e.target.value)} />
+						<label htmlFor="inpFamHx"> Family Hx Details</label>
+					</span>
+				</div>
+				<div className="field m-3">
+					<span className="p-float-label">
+						<InputText id="inpEtOH" value={etohValue} onChange={(e) => setEtohValue(e.target.value)} />
+						<label htmlFor="inpEtOH">Alcohol habits </label>
+					</span>
+				</div>
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbIllicit" 
+						checked={checkedIllicit}
+						onChange={(e) => setCheckedIllicit(e.checked)}
+						/>
+						<label htmlFor="cbIllicit">Illicit substances </label>
+					</div>
+				</div>
+				<div className="field m-3" hidden={!checkedIllicit}>
+					<span className="p-float-label">
+						<InputText id="inpIllicit" value={famHxValue} onChange={(e) => setFamHxValue(e.target.value)} />
+						<label htmlFor="inpIllicit"> Family  Details</label>
+					</span>
+				</div>
+				<Divider />
+				<div className="field m-3">
+					<div className="field-checkbox">
+						<Checkbox
+						inputId="cbNeuroCons" 
+						checked={checkedNeuroCons}
+						onChange={(e) => setCheckedNeuroCons(e.checked)}
+						/>
+						<label htmlFor="cbNeuroCons">Previous Neurological Consultation</label>
+					</div>
+				</div>
+				<div className="field m-3" hidden={!checkedNeuroCons}>
+					<span className="p-float-label">
+						<InputText id="inpNeuroCons" value={neuroConsValue} onChange={(e) => setNeuroConsValue(e.target.value)} />
+						<label htmlFor="inpNeuroCons"> Neuro Consult Details</label>
+					</span>
+				</div>
+				<div className="field m-3">
+					<MultiSelect id="msWorkUp" value={selectedWorkUp} options={workUpList} onChange={(e) => setSelectedWorkUp(e.value)} placeholder="Previous workup" display="chip"/>
+				</div>
+				<div className="field m-3">
+					<MultiSelect id="ppxHA1" value={selectedPpxMeds1} options={medList} onChange={(e) => setSelectedPpxMeds1(e.value)} placeholder="Previous Meds" display="chip"/>
+				</div>
+				<div className="field m-3" hidden={selectedPpxMeds1.length===0} >
+					<span className="p-float-label">
+						<InputText id="inpPrevRx" value={prevRxValue} onChange={(e) => setPrevRxValue(e.target.value)} />
+						<label htmlFor="inpPrevRx"> Previous Treatment Details</label>
+					</span>
+				</div>
+			</div>
+			<div className="surface-0 w-6 card m-3">
+				<div className="surface-0 p-4 shadow-2 border-round ">
+					<div className="text-3xl font-medium text-900 mb-3"> Spell </div>
+					<div id="spellText" className="border-1 border-dashed border-300" >
+						<>						
+							<p>Patient first started having spells {checkNull(durHA1)} {checkNull(selectedTimeUnit1)} ago. </p>							
+							<p>Onset of symptoms was {checkNull(selectedOnset)}. Patient has {selectedPrem.length ===0 ? 'no' : '' } premonitory symptoms<span hidden={selectedPrem.length === 0 }>, including {checkList(selectedPrem.join(', '))}</span>. </p>
+							<p>During episodes, patient has {checkList(selectedAware)}. Episodes last for {checkNull(durHA2)} {checkNull(selectedTimeUnit2)}.<br/>During episodes, patient does {checkNo(checkedMotor)} have abnormal movements<span hidden={!checkedMotor}>, described as {checkNull(motorValue)}. Motor symptoms are {checkedFocal ? 'focal' : 'generalized'} at onset <span>, beginning in the {checkNull(selectedFocalLoc)} <span>with secondary generalization</span></span></span>. Other details: {checkNull(semiValue)}. Symptoms associated with episodes include {checkNull(selectedSxPres.join(', '))}. Patient denied {checkNull(sxAbsList.join(', '))}.</p>							
+							<p>After episodes, patient has {checkNull(selectedPostIctal.join(', '))}. Postictal symptoms last for {checkNull(durHA3)} {checkNull(selectedTimeUnit3)}. Patient is {checkNo(checkedAmnesia)} amnestic about events preceding and during spell.</p>							
+							<p>Patient does {checkNo(checkedPrev)} have a history of previous spells<span hidden={!checkedPrev}>, described as {checkedSimilar ? 'similar' : 'different'} in presentation {prevValue}. Frequency of spells: {freqValue}</span>. Reported precipitating factors include {checkNull(selectedPptPres.join(', '))} {pptValue}. Patient denied precipitation by {checkNull(selectedPptAbs.join(', '))}. <br/><span hidden={!checkedPrev}>Patient had {checkNull(erVisitValue)} emergency room visits for spells in the past 1 year.</span></p>								
+							<p>Patient endorsed a medical history of {checkList(selectedChildHx.join(', '))}, {checkList(selectedPmHx.join(', '))}. Patient denied any history of {selectedChildHxAbs.join(', ')}, {selectedPmHxAbs.join(', ')}. <br/>Patient does {checkNo(checkedFamHx)} have a family history of seizure disorder<span hidden={!checkedFamHx}>, {famHxValue}</span>.<br/>Drinking habits: {checkNull(etohValue)}. Patient does {checkNo(checkedIllicit)} have a history of illicit substance use<span hidden={!checkedIllicit}>, {checkNull(illicitValue)}</span>. </p>							
+							<p>Patient does {checkNo(checkedNeuroCons)} endorse previous Neurology consultation<span hidden={!checkedNeuroCons}>, {checkNull(neuroConsValue)}</span>.<br/>Work up so far includes: {checkNull(selectedWorkUp.join(', '))} {}. Patient has not done the following investigations: {selectedWorkUpAbs.join(', ')}.</p>
+							<p>Previous medications tried include: {checkNull(selectedPpxMeds1.join(', '))}, {checkNull(prevRxValue)}</p>
+						</>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+export default Spell;

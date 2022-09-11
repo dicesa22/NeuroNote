@@ -1,0 +1,96 @@
+Seizure Disorder: 
+
+Patient first started having spells {checkNull(durHA1)} {checkNull(selectedTimeUnit1)} ago. Onset of symptoms was {checkNull(selectedOnset)}. Patient has {checkNo(selectedPrem)} premonitory symptoms, {selectedPrem.join(', ')}. 
+
+ He has had {checkNull}. During episodes, patient has {selectedAware}. 
+ Episodes last for {checkNull(durHA2)} {checkNull(selectedTimeUnit2)}.
+During episodes patient has {checkNo(checkedMotor)} abnormal movements, described as {checkNull(motorValue)}. Motor symptoms are {checkedFocal ? 'focal' : 'generalized'} at onset <span>, beginning in the {checkNull(selectedFocalLoc)} <span>with secondary generalization to {}</span></span>.
+
+Symptoms associated with episodes include {checkNull(selectedSxPres.join(', '))}. Patient denied {checkNull(sxAbsList.join(', '))}.
+
+After episodes, patient has {checkNull(selectedPostIctal.join(', '))}. Postictal symptoms last for {checkNull(durHA3)} {checkNull(selectedTimeUnit3)}. Patient is {checkNo(checkedAmnesia)} amnestic about events preceding and during spell.
+
+Reported precipitating factors include {checkNull(selectedPptPres.join(', '))} {pptValue}. Patient denied precipitation by {checkNull(selectedPptAbs.join(', '))}
+
+
+
+ Patient {does/do/not:33181} have a history of head trauma.  He {does/do/not:33181} have a history of CVA. He {does/do/not:33181} have a history of alcohol abuse. He {does/do/not:33181} have a history of drug abuse. He {does/do/not:33181} have a history of developmental delay. He {does/do/not:33181} have a family history of seizure disorder. Work up thus far has been: neurology consultation
+
+
+
+(erVisitValue)
+
+
+
+
+
+
+(checkedFamHx)
+(checkedPrev)
+(checkedSimilar)
+
+
+(semiValue)
+(famHxValue)
+(prevRxValue)
+
+
+(sxAbsList)
+(etohValue)
+(checkedIllicit)
+(illicitValue)
+
+(freqValue)
+(checkedNeuroCons)
+(neuroConsValue)
+
+()
+
+(selectedWorkUp)
+(selectedWorkUpAbs)
+(selectedPpxMeds1)
+(selectedPpxMeds2)
+(prevValue)
+(selectedChildHx)
+(selectedChildHxAbs)
+(selectedPmHx)
+(selectedPmHxAbs)
+
+
+
+CT scan of head
+MRI of head
+EEG
+drug screen
+metabolic screen
+lumbar puncture
+CBD
+sed rate
+RPR
+SPECT scan
+PET scan
+; results were ***. Treatment thus far has been: carbamazepine (Carbatrol), carbamazepine (Tegretol), carbamazepine (Tegretol XR), clonazepam (Klonopin), diazepam (Diastat), ethosuximide (Zarontin), gabapentin (Neurontin), lamotrigine (Lamictal), levetiracetam (Keppra), oxcarbazepine (Trileptal), phenobarbital, phenytoin (Dilantin), primidone (Mysoline), tiagabine (Gabitril), topiramate (Topamax), valproic acid (Depakote), zonisamide (Zonegran) and methphenidate (Ritalin), with *** results.
+
+
+Semiology #3
+Aura-
+
+Semiology of spell-
+
+Onset- focal vs generalized
+
+Duration- dur2
+
+Amnestic about event- cb
+Frequency- inp
+Most recent event- dur3
+
+Seizure Risk Factors:
+       - Preterm birth, h/o IUGR, neonatal asphyxia, NICU stay: Absent/present
+       - Family History of seizure: Absent/present
+       - History of febrile Seizure: Absent/present
+       - Prior Head Trauma: Absent/present
+       - Developmental Delay: Absent/present
+       - Perinatal complications: Absent/present
+       - Prior Meningitis/ Encephalitis: Absent/present
+       - Underlying structural abnormality: Absent/present

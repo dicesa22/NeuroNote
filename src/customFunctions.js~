@@ -1,0 +1,9 @@
+export function checkNo(x) {
+	const cNo = x ? '' : 'not';
+	return cNo;
+}
+
+export function checkNull(x) {
+	const cNo = x ? x : '_____';
+	return cNo;
+}

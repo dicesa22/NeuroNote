@@ -1,0 +1,19 @@
+<>
+<h3>Seizure Disorder:</h3> 
+
+<p>Patient first started having spells {checkNull(durHA1)} {checkNull(selectedTimeUnit1)} ago. </p>
+
+<p>Onset of symptoms was {checkNull(selectedOnset)}. Patient has {checkNo(selectedPrem)} premonitory symptoms, {selectedPrem.join(', ')}. </p>
+<p>{informant}{Eyewitness}.<br>During episodes, patient has {selectedAware}.Episodes last for {checkNull(durHA2)} {checkNull(selectedTimeUnit2)}.<br>During episodes patient has {checkNo(checkedMotor)} abnormal movements, described as {checkNull(motorValue)}. Motor symptoms are {checkedFocal ? 'focal' : 'generalized'} at onset <span>, beginning in the {checkNull(selectedFocalLoc)} <span>with secondary generalization</span></span>. Other details: {semiValue}. Symptoms associated with episodes include {checkNull(selectedSxPres.join(', '))}. Patient denied {checkNull(sxAbsList.join(', '))}.</p>
+
+<p>After episodes, patient has {checkNull(selectedPostIctal.join(', '))}. Postictal symptoms last for {checkNull(durHA3)} {checkNull(selectedTimeUnit3)}. Patient is {checkNo(checkedAmnesia)} amnestic about events preceding and during spell.</p>
+
+<p>He does {checkNo(checkedPrev)} have a previous spells, described as {checkedSimilar ? 'similar' : 'different'} in presentation {prevValue}. Frequency of spells: {freqValue}. Reported precipitating factors include {checkNull(selectedPptPres.join(', '))} {pptValue}. Patient denied precipitation by {checkNull(selectedPptAbs.join(', '))}. <br>Patient had {checkNull(erVisitValue)} emergency room visits for spells in the past 1 year.</p>
+
+
+<p>Patient endorsed a history of {selectedChildHx.join()}, {selectedPmHx.join()}. Patient denied any history of {selectedChildHxAbs.join()}, {selectedPmHxAbs.join()}. <br>Patient does {checkNo(checkedFamHx)} have a family history of seizure disorder, {famHxValue}.<br>Drinking habits: {etohValue}. He does {checkNo(checkedIllicit)} have a history of illicit substance use, {illicitValue}. </p>
+
+<p>Patient does {checkedNo(checkedNeuroCons)} endorse previous Neurology consultation, {checkedNull(neuroConsValue)}.<br>Work up so far includes: {checkedNull(selectedWorkUp)} {}. Patient has not done the following investigations: {selectedWorkUpAbs}.</p>
+
+<p>Previous medications tried include: {checkedNull(selectedPpxMeds1)}, {checkedNull(prevRxValue)}</p>
+</>

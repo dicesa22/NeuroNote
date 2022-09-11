@@ -12,7 +12,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { checkNull, checkNo } from './customFunctions';
 
-const informantList = ["family","patient"];
+const informantList = ["family","patient"]
 const alzSympList = ["changes in short-term memory","changes in long-term memory","difficulty recalling words","repetitive questions","day/night behavior changes","disorientation outside familiar environments"];
 const alzBehavList = ["paranoia","suspiciousness","hallucinations","delusions","agitation"];
 const memProbList= ["medication errors","wandering","driving","cooking","preparing meals"];
