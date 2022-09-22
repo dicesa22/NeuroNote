@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/NeuroNote/static/css/main.5f69c583.css",
-    "main.js": "/NeuroNote/static/js/main.bb18143a.js",
+    "main.js": "/NeuroNote/static/js/main.8d8c036e.js",
     "static/js/815.c838d16f.chunk.js": "/NeuroNote/static/js/815.c838d16f.chunk.js",
-    "static/js/356.986e874c.chunk.js": "/NeuroNote/static/js/356.986e874c.chunk.js",
+    "static/js/356.899fcf24.chunk.js": "/NeuroNote/static/js/356.899fcf24.chunk.js",
     "static/js/443.347b98cb.chunk.js": "/NeuroNote/static/js/443.347b98cb.chunk.js",
     "static/js/797.c37ef51d.chunk.js": "/NeuroNote/static/js/797.c37ef51d.chunk.js",
-    "static/js/978.071bf14f.chunk.js": "/NeuroNote/static/js/978.071bf14f.chunk.js",
+    "static/js/978.fc5d9e6a.chunk.js": "/NeuroNote/static/js/978.fc5d9e6a.chunk.js",
     "static/js/787.28cb0dcd.chunk.js": "/NeuroNote/static/js/787.28cb0dcd.chunk.js",
     "static/js/349.4b44a5dd.chunk.js": "/NeuroNote/static/js/349.4b44a5dd.chunk.js",
     "static/media/primeicons.svg": "/NeuroNote/static/media/primeicons.c6e2053303524e39530c.svg",
@@ -15,17 +15,17 @@
     "static/media/primeicons.ttf": "/NeuroNote/static/media/primeicons.91bacab1f083f2795272.ttf",
     "index.html": "/NeuroNote/index.html",
     "main.5f69c583.css.map": "/NeuroNote/static/css/main.5f69c583.css.map",
-    "main.bb18143a.js.map": "/NeuroNote/static/js/main.bb18143a.js.map",
+    "main.8d8c036e.js.map": "/NeuroNote/static/js/main.8d8c036e.js.map",
     "815.c838d16f.chunk.js.map": "/NeuroNote/static/js/815.c838d16f.chunk.js.map",
-    "356.986e874c.chunk.js.map": "/NeuroNote/static/js/356.986e874c.chunk.js.map",
+    "356.899fcf24.chunk.js.map": "/NeuroNote/static/js/356.899fcf24.chunk.js.map",
     "443.347b98cb.chunk.js.map": "/NeuroNote/static/js/443.347b98cb.chunk.js.map",
     "797.c37ef51d.chunk.js.map": "/NeuroNote/static/js/797.c37ef51d.chunk.js.map",
-    "978.071bf14f.chunk.js.map": "/NeuroNote/static/js/978.071bf14f.chunk.js.map",
+    "978.fc5d9e6a.chunk.js.map": "/NeuroNote/static/js/978.fc5d9e6a.chunk.js.map",
     "787.28cb0dcd.chunk.js.map": "/NeuroNote/static/js/787.28cb0dcd.chunk.js.map",
     "349.4b44a5dd.chunk.js.map": "/NeuroNote/static/js/349.4b44a5dd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5f69c583.css",
-    "static/js/main.bb18143a.js"
+    "static/js/main.8d8c036e.js"
   ]
 }
